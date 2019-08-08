@@ -9,30 +9,21 @@ import java.util.Scanner;
 
 public class Input {
     private Scanner scan = new Scanner(System.in);
-
     public boolean yesNo() {
         System.out.println("continue? [y/n]");
         String answer = scan.nextLine().toLowerCase();
         return (answer.equalsIgnoreCase("y") || answer.contains("yes"));
     }
-
     public void addContact(String first, String last, String num) {
-
         Path dataFile = Paths.get("data", "contacts.txt");
         String name = first + " " + last;
         String info = name + " | " + num + " |";
         List<String> contacts = Arrays.asList(info);
-
         try {
             Files.write(dataFile, contacts, StandardOpenOption.APPEND);
         } catch (IOException e) {
             System.out.println("ERROR");
             e.printStackTrace();
+        }
     }
-
-
-//        dataFile Files.write(Path filepath, List<String> lines[, StandardOpenOption option])
-
-    }
-
 }
