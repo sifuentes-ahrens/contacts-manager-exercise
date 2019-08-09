@@ -18,7 +18,7 @@ public class Input {
                 List<String> contactList;
                 Path contactsPath = Paths.get("data", "contacts.txt");
                 contactList = Files.readAllLines(contactsPath);
-                System.out.println("Name        |  Phone Number  |\n--------------------------------");
+                System.out.println("Name        |  Phone Number  |      email        |              \n----------------------------------------------------");
                 for (String contact : contactList) {
                     System.out.println(contact);
                 }
@@ -52,27 +52,25 @@ public class Input {
             String[] fullName = name.split(" ");
             System.out.println("Enter your Phone Number: ");
             String num = scan.nextLine();
+            System.out.println("Enter your Email: ");
+            String email = scan.nextLine();
             try {
-                stuff.addContact(fullName[0], fullName[1], num);
+                stuff.addContact(fullName[0], fullName[1], num, email);
             } catch (ArrayIndexOutOfBoundsException e) {
                 System.out.println("Incorrect format. Try again.");
                 continue;
             }
-            System.out.println("adding \"" + name + " " + num + "\" to database...");
+            System.out.println("adding \"" + name + " " + num + "\"" + email + "to database...");
             System.out.println("User Added! Continuing...");
             break;
         } while (true);
     }
-    public boolean yesNo() {
-        System.out.println("\nPress \"n\" to continue...");
-        String answer = scan.nextLine().toLowerCase();
-        return (answer.equalsIgnoreCase("y") || answer.contains("yes"));
-    }
-    public void addContact(String first, String last, String num) {
-        //Add contacts
+
+    public void addContact(String first, String last, String num, String email) {
+        //#2a Add contacts
         Path dataFile = Paths.get("data", "contacts.txt");
         String name = first + " " + last;
-        String info = name + " | " + num + " |";
+        String info = name + " | " + num + " | " + email + " |";
         List<String> contacts = Arrays.asList(info);
         try {
             Files.write(dataFile, contacts, StandardOpenOption.APPEND);
@@ -80,6 +78,11 @@ public class Input {
             System.out.println("ERROR");
             e.printStackTrace();
         }
+    }
+    public boolean yesNo() {
+        System.out.println("\nPress \"Enter\" to continue...");
+        String answer = scan.nextLine().toLowerCase();
+        return (answer.equalsIgnoreCase("y") || answer.contains("yes"));
     }
     public void deleteContacts() {
         // #4 Delete by name
