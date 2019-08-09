@@ -9,24 +9,27 @@ public class Main {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         Input yesno = new Input();
+
        do {
-        System.out.println("Please enter a number: ");
+           System.out.println("1. View Contacts.\n2. Add a new contact.\n3. Search a contact by name.\n4. Delete an existing contact.\n5. Exit.");
+           System.out.println("Enter an option (1, 2, 3, 4 or 5):");
         int answer = sc.nextInt();
+
            switch (answer) {
                case 1:
-                   yesno.searchContacts();
+                   yesno.viewContact();
                    break;
                case 2:
-                   yesno.showAddContacts();
+                   yesno.addContacts();
                    break;
                case 3:
-                   System.out.println("You pressed three!");
+                   yesno.searchContacts();
                    break;
                case 4:
-                   System.out.println("You pressed four!");
+                   yesno.deleteContacts();
                    break;
                default:
-                   System.out.println("You broke it. Good job.");
+                   System.out.println("Goodbye.");
                    break;
            }
        } while (yesno.yesNo());
